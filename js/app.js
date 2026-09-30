@@ -191,6 +191,7 @@ function renderLesson() {
       ${when}
       <div class="actions">
         <button class="btn primary" data-a="games">${ico('spark')}التحديات</button>
+        <button class="btn ${e && e.type === 'sabr' ? 'gold' : ''}" data-a="strat">${ico('dice')}استراتيجيات الحصة</button>
         ${canScore ? `<button class="btn gold" data-a="errors">${ico('pen')}تسجيل الأخطاء</button>` : ''}
         ${g.noCompetition ? '' : `<button class="btn" data-a="board">${ico('trophy')}الترتيب</button>`}
         <button class="btn" data-a="home">تغيير الصف</button>
@@ -240,6 +241,7 @@ function ico(n) {
     stop: '<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
     spark: '<path d="M12 2l2.2 6.3L20 10l-5.8 1.7L12 18l-2.2-6.3L4 10l5.8-1.7z" fill="currentColor"/>',
     pen: '<path d="M4 20l4-1 11-11-3-3L5 16zM14 6l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+    dice: '<rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><circle cx="15" cy="15" r="1.5" fill="currentColor"/><circle cx="15" cy="9" r="1.5" fill="currentColor"/><circle cx="9" cy="15" r="1.5" fill="currentColor"/>',
     trophy: '<path d="M7 4h10v4a5 5 0 01-10 0zM7 6H4a3 3 0 003 4M17 6h3a3 3 0 01-3 4M12 13v4M8 20h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
   }[n];
   return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
@@ -252,6 +254,7 @@ function wireLesson() {
     next() { if (L.idx < entries(L.grade).length - 1) { L.idx++; resetEntry(); } },
     today() { L.idx = todayIndex(entries(L.grade)); resetEntry(); },
     games() { openGames(); },
+    strat() { openStrategies(); },
     errors() { openErrors(L.sectionId, curEntry()?.id); },
     board() { board(L.grade); },
     home() { Player.stop(true); home(); },
@@ -522,6 +525,20 @@ async function openGames() {
   ov.querySelector('[data-x]').onclick = () => ov.remove();
   const P = await gatherPortion(keys);
   Games.mount(ov.querySelector('.gbody'), P);
+}
+
+async function openStrategies() {
+  const L = S.lesson;
+  const keys = L.portion ? L.keys : pageKeys();
+  if (!keys.length) { toast('لا توجد آيات لهذا اليوم'); return; }
+  Player.stop();
+  const label = Q.segLabel(L.segs) || 'صفحة ' + toAr(L.pages[L.pi]);
+  const ov = document.createElement('div');
+  ov.className = 'games';
+  ov.innerHTML = `<div class="bar"><div class="who">${logoSVG()}<span class="chip">استراتيجيات ${esc(sectionName(L.sectionId))}</span></div><div class="daynav"><div class="when"><b>${esc(label)}</b></div></div><div class="actions"><button class="btn" data-x>العودة إلى المصحف</button></div></div><div class="gbody"></div>`;
+  app().appendChild(ov);
+  ov.querySelector('[data-x]').onclick = () => { document.querySelectorAll('.qcard-ov').forEach(x => x.remove()); ov.remove(); };
+  Strat.mount(ov.querySelector('.gbody'), keys, label);
 }
 
 /* ---------- auth ---------- */

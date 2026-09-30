@@ -242,6 +242,55 @@ textarea { width: 100%; min-height: 160px; border: 1px solid var(--line); border
 .reflect { width: 100%; display: grid; gap: 14px; }
 .reflect .q { font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 700; text-align: center; font-family: var(--f-display); color: var(--ink); }
 
+/* ---------- strategies (team games) ---------- */
+.game.wide { width: min(1250px, 100%); }
+.q-quran { font-family: var(--f-quran); font-size: 1.25em; line-height: 1.9; }
+.teams { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.team { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 99px; background: var(--surface); border: 2px solid var(--line); font-size: 1.1rem; }
+.team .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--tc); }
+.team .pts { font-family: var(--f-display); font-size: 1.35rem; color: var(--tc); }
+.team.on { border-color: var(--tc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--tc) 25%, transparent); }
+.qcard-ov { z-index: 45; }
+.qcard { width: min(900px, 100%); max-height: calc(100% - 20px); overflow: auto; background: var(--surface); border-radius: 22px; border-top: 8px solid var(--tc); padding: 24px 28px; display: grid; gap: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+.qhead { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 1.15rem; }
+.qtext { font-size: clamp(1.4rem, 2.6vw, 2.1rem); font-weight: 700; line-height: 1.7; text-align: center; }
+.qans { background: var(--paper); color: var(--paper-ink); border-radius: 14px; padding: 14px 18px; font-size: 1.35rem; text-align: center; display: grid; gap: 6px; }
+.qans .muted { color: #6b5a2a; }
+.qbtns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.qbtns .btn { min-height: 56px; font-size: 1.15rem; padding-inline: 22px; }
+.banner { background: var(--surface); border-radius: 22px; padding: 30px 46px; display: grid; gap: 8px; justify-items: center; text-align: center; font-size: 1.4rem; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+.big-pts { font-family: var(--f-display); font-size: clamp(4rem, 12vw, 8rem); line-height: 1.1; }
+.pos { color: var(--ok); } .neg { color: var(--danger); }
+.boxes { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; width: 100%; }
+.mbox { aspect-ratio: 1.15; border-radius: 16px; border: 0; background: radial-gradient(circle at 50% 30%, #1d7a63, #0b3d33 70%); color: #f3e6c8; font-family: var(--f-display); font-size: clamp(1.8rem, 4vw, 3.2rem); box-shadow: inset 0 0 0 3px #b58a2e, 0 6px 16px rgba(0,0,0,.2); transition: transform .12s; }
+.mbox:not(:disabled):hover { transform: translateY(-3px) scale(1.03); }
+.mbox.open { background: var(--surface-2); box-shadow: inset 0 0 0 2px var(--line); font-size: clamp(1.2rem, 2.4vw, 2rem); }
+.snake-wrap { position: relative; width: min(760px, 100%); aspect-ratio: 6 / 5; }
+.board { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(5, 1fr); border-radius: 14px; overflow: hidden; border: 3px solid #b58a2e; }
+.sq { position: relative; display: grid; align-content: space-between; padding: 6px 8px; background: #fdf9ec; color: #1d2b27; border: 1px solid #e6dcc0; }
+.sq:nth-child(odd) { background: #f1ead3; }
+.sq .num { font-family: var(--f-display); font-size: clamp(.9rem, 1.8vw, 1.3rem); color: #6b5a2a; }
+.sq.lad { background: #dcefe6; } .sq.snk { background: #f7dcd6; }
+.tokens { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 2; }
+.tokens i { width: clamp(16px, 2.6vw, 26px); aspect-ratio: 1; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,.35); }
+.board-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+.ladder line { stroke: #8a5a14; stroke-width: 6; stroke-linecap: round; }
+.snake path { fill: none; stroke: #2f8f3a; stroke-width: 14; stroke-linecap: round; opacity: .85; }
+.snake circle { fill: #1f6d2a; }
+.dice-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; }
+.dice { width: 84px; height: 84px; border-radius: 18px; background: var(--surface); border: 3px solid var(--gold); display: grid; place-items: center; font-family: var(--f-display); font-size: 3rem; color: var(--accent); box-shadow: var(--shadow); }
+.xo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: min(560px, 100%); }
+.xcell { aspect-ratio: 1; border-radius: 18px; border: 3px solid var(--line); background: var(--surface); font-family: var(--f-display); font-size: clamp(3rem, 9vw, 6rem); line-height: 1; display: grid; place-items: center; }
+.xcell small { font-family: var(--f-body); font-size: clamp(.8rem, 1.4vw, 1.05rem); color: var(--muted); font-weight: 600; }
+.xcell:not(:disabled):hover { border-color: var(--gold); }
+.win { display: grid; justify-items: center; gap: 6px; padding: 30px 60px; border-radius: 24px; background: var(--surface); border: 4px solid var(--tc); font-size: 1.4rem; box-shadow: var(--shadow); }
+.win .wname { font-family: var(--f-display); font-size: clamp(2.4rem, 6vw, 4rem); color: var(--tc); }
+details.bank { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 16px; }
+details.bank summary { cursor: pointer; font-size: 1.15rem; }
+details.bank ol { display: grid; gap: 12px; margin: 10px 0 0; padding-inline-start: 1.4em; list-style: arabic-indic; }
+.bank-ans { background: var(--surface-2); border-radius: 10px; padding: 6px 12px; margin-top: 4px; }
+@media (max-width: 700px) { .boxes { grid-template-columns: repeat(3, 1fr); } }
+
 /* ---------- board ---------- */
 .page-screen { min-height: 100%; display: grid; grid-template-rows: auto 1fr; }
 .content { padding: 20px max(16px, 3vw) 40px; display: grid; gap: 18px; align-content: start; width: min(1200px, 100%); justify-self: center; }
